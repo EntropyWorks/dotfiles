@@ -1,0 +1,16 @@
+#!/bin/bash
+alias git="/opt/local/bin/git"
+alias git-cvsserver="/opt/local/bin/git-cvsserver"
+alias git-flow="/opt/local/bin/git-flow"
+alias git-receive-pack="/opt/local/bin/git-receive-pack"
+alias git-shell="/opt/local/bin/git-shell"
+alias git-upload-archive="/opt/local/bin/git-upload-archive"
+alias git-upload-pack="/opt/local/bin/git-upload-pack"
+alias gitk="/opt/local/bin/gitk"
+alias gitx="/opt/local/bin/gitx"
+alias ls='ls -FCG'
+alias webserver="python -m SimpleHTTPServer"
+# Start privoxy that i installed via macports
+alias privoxy="sudo launchctl unload /Library/LaunchDaemons/org.macports.Privoxy.plist; \
+           sleep 2; sudo launchctl load /Library/LaunchDaemons/org.macports.Privoxy.plist"
+

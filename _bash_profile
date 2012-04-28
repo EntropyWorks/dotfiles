@@ -1,0 +1,5 @@
+# Just source the .bashrc so everything get done right
+
+
+source ~/.bashrc
+

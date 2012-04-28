@@ -1,0 +1,87 @@
+#!/bin/bash
+# Yazz bash stuff
+#export LC_CTYPE="utf-8"
+export PATH=${PATH}:~/.bin
+export PATH=${PATH}:/opt/local/bin:/opt/local/sbin
+export PATH=${PATH}:~/Applications/android-sdk-mac_86/tools
+export PATH=${PATH}:.
+export GIT_SSL_NO_VERIFY=true
+
+export EDITOR=/usr/bin/vim
+export TM_SUPPORT_PATH="/Library/Application Support/TextMate/Support"
+export HISTTIMEFORMAT='%F %T '
+export HISTCONTROL=ignoredups
+export HISTCONTROL=erasedups
+export EDITOR="/usr/bin/vim"
+
+#export RUBYLIB=~/knife-plugins/lib
+
+# Bash Aliases
+[[ -s "$HOME/.bash_aliases" ]] && . "$HOME/.bash_aliases"
+# Ruby Stuff
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+# Hp Setup One
+[[ -s "$HOME/.bash_hpcloud" ]] && . "$HOME/.bash_hpcloud"
+# bash_functions
+[[ -s "$HOME/.bash_functions" ]] && . "$HOME/.bash_functions"
+
+[ -z "$PS1" ] && return
+#echo " Running interactively"
+
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+export CLICOLOR=1
+
+# If not running interactively, don't do anything
+# append to the history file, don't overwrite it
+shopt -s histappend
+shopt -s checkwinsize
+
+# don't put duplicate lines in the history. See bash(1) for more options
+# ... or force ignoredups and ignorespace
+HISTCONTROL=ignoredups:ignorespace
+#HISTCONTROL=ignorespace
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+if [[ "$WINDOW" != "" ]] ; then
+  export HISTFILE=~/.bash_history.$(hostname).$WINDOW ;
+else
+  export HISTFILE="${HOME}/.bash_history.$(hostname)"
+fi
+# Not everyone likes seeing this
+#echo " HISTFILE=${HISTFILE}"
+
+# Moved my prompt out of this file since its so big
+if [ -f ~/.bash_prompt ]; then
+  source ~/.bash_prompt
+fi
+
+if [ -f /etc/bash_completion ]; then
+ . /etc/bash_completion
+fi
+
+if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+  . /opt/local/etc/profile.d/bash_completion.sh
+fi
+
+
+# Imperative that this environment variable always reflects the output
+# of the tty command.
+GPG_TTY=`tty`
+export GPG_TTY
+
+# Script for ensuring only one instance of gpg-agent is running
+# and if there is not one, start an instance of gpg-agent.
+#if test -f $HOME/.gpg-agent-info && kill -0 `cut -d: -f 2 $HOME/.gpg-agent-info` 2>/dev/null; then
+#  GPG_AGENT_INFO=`cat $HOME/.gpg-agent-info`
+#  SSH_AUTH_SOCK=`cat $HOME/.ssh-auth-sock`
+#  SSH_AGENT_PID=`cat $HOME/.ssh-agent-pid`
+#  export GPG_AGENT_INFO 
+#else
+#  eval $(gpg-agent --daemon --enable-ssh-support)
+#  echo $GPG_AGENT_INFO >$HOME/.gpg-agent-info
+#  echo $SSH_AUTH_SOCK > $HOME/.ssh-auth-sock
+#  echo $SSH_AGENT_PID > $HOME/.ssh-agent-pid
+#fi

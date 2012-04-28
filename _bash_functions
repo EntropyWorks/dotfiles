@@ -1,0 +1,51 @@
+#!/bin/bash
+# Where I put bigger functions mostly...
+#
+# Ruby thing
+function gemdir {
+export PATH=${PATH}
+  if [[ -z "$1" ]] ; then
+    echo "gemdir expects a parameter, which should be a valid RVM Ruby selector"
+  else
+    rvm "$1"
+    cd $(rvm gemdir)
+    pwd
+  fi
+}
+
+# Handy if you setup a tor proxy
+function tor-yes() {
+	http_proxy=http://127.0.0.1:8118/
+	HTTP_PROXY=$http_proxy
+	export http_proxy HTTP_PROXY
+}
+
+function tor-no() {
+	http_proxy=""
+	HTTP_PROXY=$http_proxy
+	export http_proxy HTTP_PROXY
+	unset $http_proxy
+	unset $HTTP_PROXY
+}
+
+# Some OSX stuff
+function pman () {
+    man -t "${1}" | open -f -a /Applications/Preview.app
+}
+
+function tman () {
+  MANWIDTH=160 MANPAGER='col -bx' man $@ | mate
+}
+
+function quit () {
+    for app in $*; do
+        osascript -e 'quit app "'$app'"'
+    done
+}
+
+# very simple password generator
+function genpasswd() {
+    local l=$1
+    [ "$l" == "" ] && l=12
+    LC_ALL=C tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+}
