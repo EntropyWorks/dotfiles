@@ -29,9 +29,8 @@ function mine-shared(){
   export OS_TENANT_NAME="${tenant_1}"
   export OS_USERNAME="${username_1}"
   export OS_PASSWORD="${password_1}"
-  cd ~/Work/hpcloud/ && pwd
   export SSH_STUFF="${ssh_stuff_0:-${ssh_stuff_1}}"
-  alias ssh='ssh $SSH_STUFF'
+  #alias ssh='ssh $SSH_STUFF'
 }
 
 function mine1 (){
@@ -61,7 +60,7 @@ dbas-shared(){
   export OS_USERNAME="${username_2}"
   export OS_PASSWORD="${password_2}"
   export SSH_STUFF="${ssh_stuff_0:-${ssh_stuff_2}}"
-  alias ssh='ssh $SSH_STUFF'
+  #alias ssh='ssh $SSH_STUFF'
 }
 
 dbaz1(){
