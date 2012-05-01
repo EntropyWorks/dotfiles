@@ -1,4 +1,5 @@
 #!/bin/bash
+alias myssh="/usr/bin/ssh"
 alias git="/opt/local/bin/git"
 alias git-cvsserver="/opt/local/bin/git-cvsserver"
 alias git-flow="/opt/local/bin/git-flow"
