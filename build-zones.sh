@@ -1,6 +1,6 @@
 # Trying to auto generate my settings for all the different zones
 # we have here at HPCS
-AVALABILITY_ZONES="yazz rndb rndc rnde rndd st1 st2"
+AVALABILITY_ZONES="yazz aaron rndb rndc rnde rndd st1 st2"
 # CURRENT_RUBY="${ruby_rvm_0:-${rvm${zone}}}"
 #set -x
 if [ -s "${HOME}/.bash_cloud_secrets" ] ; then
@@ -24,6 +24,8 @@ if [ -s "${HOME}/.bash_cloud_secrets" ] ; then
     rvm \${CURRENT_RUBY}
     export CURRENT_PYTHON="\$${zone}_python"
     source \${CURRENT_PYTHON}
+    export CURRENT_KNIFE_ENV="\$${zone}_knife"
+    alias ${zone}-knife='knife block use \${CURRENT_KNIFE_ENV} --yes'
   }
   ${zone}-2(){
     export OS_TENANT_NAME="\$${zone}_tenant"
@@ -36,6 +38,8 @@ if [ -s "${HOME}/.bash_cloud_secrets" ] ; then
     rvm \${CURRENT_RUBY}
     export CURRENT_PYTHON="\$${zone}_python"
     source \${CURRENT_PYTHON}
+    export CURRENT_KNIFE_ENV="\$${zone}_knife"
+    alias ${zone}-knife='knife block use \${CURRENT_KNIFE_ENV} --yes'
   }
 EOF
   done
