@@ -3,8 +3,8 @@ This is my bash stuff to make working with the multiple AZ productive.
 DO NOT RUN ./install.sh unless you want to link your .bash* file to 
 the ones located where this has been checked out.  
 
-You will need to create a .bash_cloud_secrets based on the bash_cloud_secrets
-file here. Do not modify the bash_cloud_secrets and link back to it. That 
+You will need to create a ~/.cloud_secrets based on the cloud_secrets
+file here. Do not modify the cloud_secrets and link back to it. That 
 way we don't check in those passwords into git.
 
 
