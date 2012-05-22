@@ -19,3 +19,4 @@ for i in _*
 do
     link_file $i
 done
+echo "Run build-zones.sh"

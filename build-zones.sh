@@ -35,12 +35,11 @@ EOF
     export CURRENT_KNIFE_ENV="\$${zone}_knife"
     knife block use \${CURRENT_KNIFE_ENV}
   }
-  # ${zone}-1 settings 
-  ${zone}-1(){
+  # Items shared in ${zone}
+  shared-${zone}(){
     export OS_TENANT_NAME="\$${zone}_tenant"
     export OS_USERNAME="\$${zone}_username"
     export OS_PASSWORD="\$${zone}_password"
-    export OS_REGION_NAME="\$${zone}_region_name_1"
     export OS_AUTH_URL="\$${zone}_auth_url"
 
     export NOVA_USERNAME="\$${zone}_username"
@@ -51,7 +50,22 @@ EOF
     export HP_ACCOUNT="\$${zone}_tenant_id"
     export HP_SECRET="\$${zone}_api_secret"
     export HP_AUTH="\$${zone}_auth_url"
+
+    export CURRENT_RUBY="\$${zone}_rvm"
+    export CURRENT_PYTHON="\$${zone}_python"
+    
+    # Setup ruby and python
+    rvm \${CURRENT_RUBY}
+    source \${CURRENT_PYTHON}
+
+    check-knife ${zone}_knife
+  }
+  # ${zone}-1 settings 
+  ${zone}-1(){
+    shared-${zone}
+
     export HP_AVL_ZONE="az1"
+    export OS_REGION_NAME="\$${zone}_region_name_1"
 
     export AWS_ACCESS_KEY_ID="\$${zone}_api_1"
     export AWS_SECRET_ACCESS_KEY="\$${zone}_api_secret"
@@ -59,26 +73,13 @@ EOF
     export AWS_SECRET_KEY=\$AWS_SECRET_ACCESS_KEY
 
     export CLOUD_PROMPT="\${UGreen}${zone}-1\${Color_Off}"
-    export CURRENT_RUBY="\$${zone}_rvm"
-    export CURRENT_PYTHON="\$${zone}_python"
-
-    rvm \${CURRENT_RUBY}
-    source \${CURRENT_PYTHON}
-
-    check-knife ${zone}_knife
   }
   # ${zone}-2 settings 
   ${zone}-2(){
-    export OS_TENANT_NAME="\$${zone}_tenant"
-    export OS_USERNAME="\$${zone}_username"
-    export OS_PASSWORD="\$${zone}_password"
-    export OS_REGION_NAME="\$${zone}_region_name_2"
-    export OS_AUTH_URL="\$${zone}_auth_url"
+    shared-${zone}
 
-    export HP_ACCOUNT="\$${zone}_tenant_id"
-    export HP_SECRET="\$${zone}_api_secret"
-    export HP_AUTH="\$${zone}_auth_url"
     export HP_AVL_ZONE="az2"
+    export OS_REGION_NAME="\$${zone}_region_name_2"
 
     export AWS_ACCESS_KEY="\$${zone}_api_2"
     export AWS_SECRET_ACCESS_KEY="\$${zone}_api_secret"
@@ -86,26 +87,13 @@ EOF
     export AWS_SECRET_KEY=\$AWS_SECRET_ACCESS_KEY
 
     export CLOUD_PROMPT="\${UBlue}${zone}-2\${Color_Off}"
-    export CURRENT_RUBY="\$${zone}_rvm"
-    export CURRENT_PYTHON="\$${zone}_python"
-
-    rvm \${CURRENT_RUBY}
-    source \${CURRENT_PYTHON}
-
-    check-knife ${zone}_knife
   }
   # ${zone}-3 settings 
   ${zone}-3(){
-    export OS_TENANT_NAME="\$${zone}_tenant"
-    export OS_USERNAME="\$${zone}_username"
-    export OS_PASSWORD="\$${zone}_password"
-    export OS_REGION_NAME="\$${zone}_region_name_3"
-    export OS_AUTH_URL="\$${zone}_auth_url"
+    shared-${zone}
 
-    export HP_ACCOUNT="\$${zone}_tenant_id"
-    export HP_SECRET="\$${zone}_api_secret"
-    export HP_AUTH="\$${zone}_auth_url"
     export HP_AVL_ZONE="az3"
+    export OS_REGION_NAME="\$${zone}_region_name_3"
 
     export AWS_ACCESS_KEY="\$${zone}_api_3"
     export AWS_SECRET_ACCESS_KEY="\$${zone}_api_secret"
@@ -113,13 +101,6 @@ EOF
     export AWS_SECRET_KEY=\$AWS_SECRET_ACCESS_KEY
 
     export CLOUD_PROMPT="\${URed}${zone}-3\${Color_Off}"
-    export CURRENT_RUBY="\$${zone}_rvm"
-    export CURRENT_PYTHON="\$${zone}_python"
-
-    rvm \${CURRENT_RUBY}
-    source \${CURRENT_PYTHON}
-
-    check-knife ${zone}_knife
   }
 EOF
   done
