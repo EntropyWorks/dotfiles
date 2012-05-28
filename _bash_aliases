@@ -1,14 +1,14 @@
 #!/bin/bash
 alias myssh="/usr/bin/ssh"
-alias git="/opt/local/bin/git"
-alias git-cvsserver="/opt/local/bin/git-cvsserver"
-alias git-flow="/opt/local/bin/git-flow"
-alias git-receive-pack="/opt/local/bin/git-receive-pack"
-alias git-shell="/opt/local/bin/git-shell"
-alias git-upload-archive="/opt/local/bin/git-upload-archive"
-alias git-upload-pack="/opt/local/bin/git-upload-pack"
-alias gitk="/opt/local/bin/gitk"
-alias gitx="/opt/local/bin/gitx"
+alias git=$(which git)
+alias git-cvsserver=$(which git-cvsserver)
+alias git-flow=$(which git-flow)
+alias git-receive-pack=$(which git-receive-pack)
+alias git-shell=$(which git-shell)
+alias git-upload-archive=$(which git-upload-archive)
+alias git-upload-pack=$(which git-upload-pack)
+alias gitk=$(which gitk)
+alias gitx=$(which gitx)
 alias ls='ls -FCG'
 alias webserver="python -m SimpleHTTPServer"
 # Start privoxy that i installed via macports
