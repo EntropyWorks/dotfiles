@@ -1,4 +1,4 @@
-#!/bin/bash
+# Alias file to be sourced 
 alias myssh="/usr/bin/ssh"
 alias git=$(which git)
 alias git-cvsserver=$(which git-cvsserver)
