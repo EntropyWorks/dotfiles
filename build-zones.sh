@@ -1,6 +1,5 @@
 # Trying to auto generate my settings for all the different zones
 # we have here at HPCS
-#AVALABILITY_ZONES="rnda rndb rndc rnde rndd st1 st2"
 AVALABILITY_ZONES=$(grep _username ~/.cloud_secrets |grep -v \"\" | cut -d "_" -f 1)
 
 #
@@ -13,18 +12,18 @@ if [ -s "${HOME}/.cloud_secrets" ] ; then
   echo "source \${HOME}/.cloud_secrets" >> ${HOME}/.bash_rnd_zones
   echo "export NOVA_VERSION=1.1" >> ${HOME}/.bash_rnd_zones
 
-  cat <<EOF>> ${HOME}/.bash_rnd_zones
-  check-knife(){
-    if [ -z "\${1}" ] ; then
-      echo "- No zone passed as parameter-"
-    else
-      knife_block="\$${1}_knife"
-      readlink ~/.chef/knife.rb | grep knife-\${knife_block}
-      if [ \$? -eq 1 ]   ; then
-        \${1}-knife 
-      fi
+cat <<EOF>> ${HOME}/.bash_rnd_zones
+check-knife(){
+  if [ -z "\${1}" ] ; then
+    echo "- No zone passed as parameter-"
+  else
+    knife_block="\$${1}_knife"
+    readlink ~/.chef/knife.rb | grep knife-\${knife_block}
+    if [ \$? -eq 1 ]   ; then
+      \${1}-knife 
     fi
-  }
+  fi
+}
 EOF
 
 for zone in $* ${AVALABILITY_ZONES}
@@ -33,6 +32,8 @@ cat <<EOF>> ${HOME}/.bash_rnd_zones
 # ${zone} change knife.rb
 ${zone}-knife(){
   export CURRENT_KNIFE_ENV="\$${zone}_knife"
+  export CURRENT_RUBY="\$${zone}_rvm"
+  rvm use \${CURRENT_RUBY}
   knife block use \${CURRENT_KNIFE_ENV}
 }
 # Items shared in ${zone}
@@ -57,7 +58,11 @@ shared-${zone}(){
   # Setup python 
   source \${CURRENT_PYTHON}
   # Setup knife
-  check-knife ${zone}_knife
+  readlink ~/.chef/knife.rb | grep "knife-\$${zone}_knife"
+  if [ \$? -eq 1 ]   ; then
+    ${zone}-knife 
+  fi
+  #check-knife \$${zone}_knife
   # Setup ruby 
   rvm use \${CURRENT_RUBY}
 }
