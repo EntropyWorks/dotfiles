@@ -1,6 +1,6 @@
 # Trying to auto generate my settings for all the different zones
 # we have here at HPCS
-AVALABILITY_ZONES=$(grep _username ~/.cloud_secrets |grep -v \"\" | cut -d "_" -f 1)
+AVALABILITY_ZONES=$(grep _knife ~/.cloud_secrets |grep -v \"\" | cut -d "_" -f 1)
 
 #
 if [ -s "${HOME}/.cloud_secrets" ] ; then
@@ -28,6 +28,7 @@ EOF
 
 for zone in $* ${AVALABILITY_ZONES}
 do
+echo "Setting up ${zone}"
 cat <<EOF>> ${HOME}/.bash_rnd_zones
 # ${zone} change knife.rb
 ${zone}-knife(){
