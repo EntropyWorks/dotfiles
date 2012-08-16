@@ -32,8 +32,13 @@ export EDITOR="/usr/bin/vim"
 
 # This doesn't work right 
 #if [ -f ~/.bash_knife-completion ]; then
-# . ~/.bash_knife-completion
+#  source $(readlink ~/.bash_knife-completion)
 #fi
+
+# This doesn't work right 
+if [ -f ~/.bash_ssh-completion ]; then
+  source $(readlink ~/.bash_ssh-completion)
+fi
 
 
 if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
