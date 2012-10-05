@@ -11,6 +11,14 @@ if [ -s "${HOME}/.cloud_secrets" ] ; then
   echo "# " >> ${HOME}/.bash_rnd_zones
   echo "source \${HOME}/.cloud_secrets" >> ${HOME}/.bash_rnd_zones
   echo "export NOVA_VERSION=1.1" >> ${HOME}/.bash_rnd_zones
+  echo "# You may want to tweek this" >> ${HOME}/.bash_rnd_zones
+  echo "export chef_cookbook_copyright=\"HP\"" >> ${HOME}/.bash_rnd_zones
+  echo "export chef_cookbook_email=\"Yazz Atlas <yazz.atlas@hp.com>\"" >> ${HOME}/.bash_rnd_zones
+  echo "export chef_cookbook_license=\"none\"" >> ${HOME}/.bash_rnd_zones
+  echo "export CHEF_COOKBOOK_COPYRIGHT=\"HP\"" >> ${HOME}/.bash_rnd_zones
+  echo "export CHEF_COOKBOOK_EMAIL=\"Yazz Atlas <yazz.atlas@hp.com>\"" >> ${HOME}/.bash_rnd_zones
+  echo "export CHEF_COOKBOOK_LICENSE=\"none\"" >> ${HOME}/.bash_rnd_zones
+  echo " " >> ${HOME}/.bash_rnd_zones
 
 cat <<EOF>> ${HOME}/.bash_rnd_zones
 check-knife(){
@@ -39,7 +47,18 @@ ${zone}-knife(){
 }
 # Items shared in ${zone}
 shared-${zone}(){
-  #
+  #  Some chef setup stuff in to expose so we can use one basic 
+  # knife.rb. Just pull in the enviromental variable
+  export CHEF_SERVER_URL="\$${zone}_chef_server_url"
+  export OPSCODE_USER="\$${zone}_opscode_user"
+  export ORGNAME="\$${zone}_orgname"
+  export VALIDATION_CLIENT_NAME="\$${zone}_validation_client_name"
+  export CHEF_COOKBOOK_COPYRIGHT="\$${zone}_chef_cookbook_copyright"
+  export CHEF_COOKBOOK_EMAIL="\$${zone}_chef_cookbook_email"
+  export CHEF_COOKBOOK_LICENSE="\$${zone}_chef_cookbook_license"
+  export CHEF_SERVER_URL="\$${zone}_chef_server_url"
+  # 
+  # Nova
   export OS_TENANT_NAME="\$${zone}_tenant"
   export OS_USERNAME="\$${zone}_username"
   export OS_PASSWORD="\$${zone}_password"

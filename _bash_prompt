@@ -93,7 +93,7 @@ if [ "$PS1" ]; then
         PROMPT_COMMAND=/etc/sysconfig/bash-prompt-screen
       else
         # Added by Yazz. If this causes editor problems please let me know
-        SCREEN_TITLE='\[\ek\u@\h: \w\e\\\]' ;
+        SCREEN_TITLE='\[\ek\u@\h: iHHHHHH \w\e\\\]' ;
         shopt -s checkwinsize
         #[ "$PS1" = "\\s-\\v\\\$ " ] && PS1="\h:\W \u\[\033[0;32m\]\$(parse_git_branch_and_add_brackets)\[\033[0m\]\$ "
         function _prompt_command() {

@@ -20,6 +20,13 @@ export EDITOR="/usr/bin/vim"
 [[ -s "$HOME/.bash_aliases" ]] && . "$HOME/.bash_aliases"
 # Ruby Stuff
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+#if [[ -z "${MANPATH:-}" ]]; then
+#  export MANPATH="${rvm_man_path}"
+#elif ! [[ ":${MANPATH}:" =~ ":${rvm_man_path}:" ]]; then
+#  export MANPATH="${MANPATH}:${rvm_man_path}"
+#fi
+
 # Hp Setup One
 [[ -s "$HOME/.bash_hpcloud" ]] && . "$HOME/.bash_hpcloud"
 # bash_functions
@@ -29,6 +36,7 @@ export EDITOR="/usr/bin/vim"
 [[ -s ~/.bash_prompt ]] && source ~/.bash_prompt
 # Bash completion
 [[ -s /etc/bash_completion ]] && . /etc/bash_completion
+[[ -s /opt/local/etc/bash_completion ]] && . /opt/local/etc/bash_completion
 
 # This doesn't work right 
 #if [ -f ~/.bash_knife-completion ]; then
@@ -40,10 +48,11 @@ if [ -f ~/.bash_ssh-completion ]; then
   source $(readlink ~/.bash_ssh-completion)
 fi
 
+# This is annoying someone renamed the file in the port a while ago
+#if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+#  . /opt/local/etc/profile.d/bash_completion.sh
+#fi
 
-if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
-  . /opt/local/etc/profile.d/bash_completion.sh
-fi
 
 [ -z "$PS1" ] && return
 #echo " Running interactively"
