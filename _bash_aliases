@@ -15,4 +15,6 @@ alias webserver="python -m SimpleHTTPServer"
 # Start privoxy that i installed via macports
 alias privoxy="sudo launchctl unload /Library/LaunchDaemons/org.macports.Privoxy.plist; \
            sleep 2; sudo launchctl load /Library/LaunchDaemons/org.macports.Privoxy.plist"
-
+if [ -f ~/.bash_private_aliases ] ; then 
+  source ~/.bash_private_aliases
+fi

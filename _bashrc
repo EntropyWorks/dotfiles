@@ -6,6 +6,7 @@ export PATH=${PATH}:~/Applications/android-sdk-mac_86/tools
 export PATH="$HOME/Library/Haskell/bin:$PATH"
 export PATH=${PATH}:.
 export GIT_SSL_NO_VERIFY=true
+export GIT_SSL_NO_VERIFY=1
 
 export EDITOR=/usr/bin/vim
 export TM_SUPPORT_PATH="/Library/Application Support/TextMate/Support"
