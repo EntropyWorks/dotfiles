@@ -3,7 +3,8 @@
 export PATH=${PATH}:~/.bin
 export PATH=${PATH}:/opt/local/bin:/opt/local/sbin
 export PATH=${PATH}:~/Applications/android-sdk-mac_86/tools
-export PATH="$HOME/Library/Haskell/bin:$PATH"
+export PATH=$HOME/Library/Haskell/bin:$PATH
+export PATH=$PATH:~/Work/diskimage-builder/bin
 export PATH=${PATH}:.
 export GIT_SSL_NO_VERIFY=true
 export GIT_SSL_NO_VERIFY=1
