@@ -41,9 +41,16 @@ cat <<EOF>> ${HOME}/.bash_rnd_zones
 # ${zone} change knife.rb
 ${zone}-knife(){
   export CURRENT_KNIFE_ENV="\$${zone}_knife"
-  export CURRENT_RUBY="\$${zone}_rvm"
-  rvm use \${CURRENT_RUBY}
+  pushd ~
   knife block use \${CURRENT_KNIFE_ENV}
+  popd
+}
+# ${zone} change ruby 
+${zone}-ruby(){
+  export CURRENT_RUBY="\$${zone}_rvm"
+  pushd ~
+  rvm use \${CURRENT_RUBY}
+  popd
 }
 # Items shared in ${zone}
 shared-${zone}(){
