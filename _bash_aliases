@@ -18,3 +18,8 @@ alias privoxy="sudo launchctl unload /Library/LaunchDaemons/org.macports.Privoxy
 if [ -f ~/.bash_private_aliases ] ; then 
   source ~/.bash_private_aliases
 fi
+
+alias mac-info-0="kextstat -kl | awk ' !/apple/ { print $6 $7 } '"
+alias mac-info-1="sudo launchctl list | sed 1d | awk ' !/0x|apple|com\.vix|edu\.|org\./ { print $3 } '"
+alias mac-info-2="launchctl list | sed 1d | awk ' !/0x|apple|edu\.|org\./ { print $3 } '"
+alias mac-info-3="ls -1A {,/}Library/{Ad,Compon,Ex,Fram,In,La,Mail/Bu,P*P,Priv,Qu,Scripti,Servi,Sta}* 2> /dev/null"
