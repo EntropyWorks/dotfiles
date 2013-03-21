@@ -9,6 +9,7 @@ alias git-upload-archive=$(which git-upload-archive)
 alias git-upload-pack=$(which git-upload-pack)
 alias gitk=$(which gitk)
 alias gitx=$(which gitx)
+alias nssh='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
 alias pass-backup="mkdir -p ~/backup/$(date +%Y/%D) && knife backup export ~/backup/$(date +%Y/%D)"
 alias ls='ls -FCG'
 alias webserver="python -m SimpleHTTPServer"
