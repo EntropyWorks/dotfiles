@@ -83,7 +83,9 @@ if [ "$PS1" ]; then
         function _prompt_command() {
           #PS1="`_git_prompt`${debian_chroot:+($debian_chroot)}\u@\h:\w\[\033[0;32m\]\$(parse_git_branch_and_add_brackets)\[\033[0m\]\n\$ "
           #PS1="${debian_chroot:+($debian_chroot)}\u@\h:[$(get_knife_block_used)]:${CLOUD_PROMPT:-}:\n$(_git_prompt) \w\n\$ "
-          PS1="${debian_chroot:+($debian_chroot)}${On_Cyan}$(get_knife_block_used)${Color_Off}:${CLOUD_PROMPT:-}:$(_git_prompt)\n\u@\h:\w\n\$ "
+          PS5="${debian_chroot:+($debian_chroot)}${On_Cyan}$(get_knife_block_used)${Color_Off}:${CLOUD_PROMPT:-}:$(_git_prompt)"
+          PS4='\n\u@\h:\w\n\$ '
+          PS1="${PS5}${PS4}" ;
         }
         PROMPT_COMMAND='_prompt_command; echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}"; echo -ne "\007"'
       fi
@@ -98,8 +100,9 @@ if [ "$PS1" ]; then
         #[ "$PS1" = "\\s-\\v\\\$ " ] && PS1="\h:\W \u\[\033[0;32m\]\$(parse_git_branch_and_add_brackets)\[\033[0m\]\$ "
         function _prompt_command() {
           #PS5="`_git_prompt`${debian_chroot:+($debian_chroot)}\u@\h:${CLOUD_PROMPT:-}:\w\[\033[0;32m\]\$(parse_git_branch_and_add_brackets)\[\033[0m\]\n\$ "
-          PS5="${debian_chroot:+($debian_chroot)}${On_Cyan}$(get_knife_block_used)${Color_Off}:${CLOUD_PROMPT:-}:$(_git_prompt)\n\u@\h:\w\n\$ "
-          PS1="${SCREEN_TITLE}${PS5}" ;
+          PS5="${debian_chroot:+($debian_chroot)}${On_Cyan}$(get_knife_block_used)${Color_Off}:${CLOUD_PROMPT:-}:$(_git_prompt)"
+          PS4='\n\u@\h:\w\n\$ '
+          PS1="${SCREEN_TITLE}${PS5}${PS4}" ;
         }
         PROMPT_COMMAND='_prompt_command; echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/~}"; echo -ne "\033\\"' ;
         # End of Yazz add
@@ -111,7 +114,9 @@ if [ "$PS1" ]; then
       shopt -s checkwinsize
       #[ "$PS1" = "\\s-\\v\\\$ " ] && PS1="\h:\W \u\[\033[0;32m\]\$(parse_git_branch_and_add_brackets)\[\033[0m\]\$ "
       #PS1="`_git_prompt`${debian_chroot:+($debian_chroot)}\u@\h:[$(get_knife_block_used)]:${CLOUD_PROMPT:-}:\w\[\033[0;32m\]\$(parse_git_branch_and_add_brackets)\[\033[0m\]\n\$ "
-      PS1="${debian_chroot:+($debian_chroot)}${On_Cyan}$(get_knife_block_used)${Color_Off}:${CLOUD_PROMPT:-}:$(_git_prompt)\n\u@\h:\w\n\$ "
+      PS5="${debian_chroot:+($debian_chroot)}${On_Cyan}$(get_knife_block_used)${Color_Off}:${CLOUD_PROMPT:-}:$(_git_prompt)"
+      PS4='\n\u@\h:\w\n\$ '
+      PS1="${PS5}${PS4}" ;
         ;;
     esac
 fi
