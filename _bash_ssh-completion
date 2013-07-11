@@ -2,4 +2,8 @@
 # want to connect from the list of the ones contained in ~/.ssh/known_hosts
 complete -A hostname -C "/usr/bin/perl -e 'my \$match = \$ARGV[1] ? \$ARGV[1] : \".*\"; open(my \$INPUT,\"<\",\"$HOME/.ssh/config\") or exit(0); foreach(<\$INPUT>) {next unless s/^\s*Host(name)?\s+//;chomp;foreach(split(/\s+/)) { print \"\$_\\n\" if(/^\$match/ and not /^\d/ and not /\*/);}}'" ssh 
 
+complete -A hostname -C "/usr/bin/perl -e 'my \$match = \$ARGV[1] ? \$ARGV[1] : \".*\"; open(my \$INPUT,\"<\",\"$HOME/.ssh/config\") or exit(0); foreach(<\$INPUT>) {next unless s/^\s*Host(name)?\s+//;chomp;foreach(split(/\s+/)) { print \"\$_\\n\" if(/^\$match/ and not /^\d/ and not /\*/);}}'" scp
+
 complete -A hostname -C "/usr/bin/perl -e 'my \$match = \$ARGV[1] ? \$ARGV[1] : \".*\"; open(my \$INPUT,\"<\",\"$HOME/.ssh/config\") or exit(0); foreach(<\$INPUT>) {next unless s/^\s*Host(name)?\s+//;chomp;foreach(split(/\s+/)) { print \"\$_\\n\" if(/^\$match/ and not /^\d/ and not /\*/);}}'" sftp
+
+complete -A hostname -C "/usr/bin/perl -e 'my \$match = \$ARGV[1] ? \$ARGV[1] : \".*\"; open(my \$INPUT,\"<\",\"$HOME/.ssh/config\") or exit(0); foreach(<\$INPUT>) {next unless s/^\s*Host(name)?\s+//;chomp;foreach(split(/\s+/)) { print \"\$_\\n\" if(/^\$match/ and not /^\d/ and not /\*/);}}'" hpssh

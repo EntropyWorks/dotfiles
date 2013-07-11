@@ -1,4 +1,4 @@
-# This is borrowed from: 
+# Thi is borrowed from: 
 # https://github.com/openstack/python-novaclient/blob/master/tools/nova.bash_completion
 #
 _nova()
