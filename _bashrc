@@ -8,6 +8,7 @@ export PATH=$PATH:~/Work/diskimage-builder/bin
 export PATH=${PATH}:.
 export GIT_SSL_NO_VERIFY=true
 export GIT_SSL_NO_VERIFY=1
+export GIT_GPG_GROUP=true
 
 export EDITOR=/usr/bin/vim
 export TM_SUPPORT_PATH="/Library/Application Support/TextMate/Support"
