@@ -16,3 +16,19 @@ _nova()
     COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
 }
 complete -F _nova nova
+
+_neutron()
+{
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    opts="$(neutron help |grep -A-1 "^Commands for API v2.0:" | grep -v "^Commands for API v2.0:"| awk '{ print $1 }')"
+
+    #COMPLETION_CACHE=~/.novaclient/*/*-cache
+    #opts+=" "$(cat $COMPLETION_CACHE 2> /dev/null | tr '\n' ' ')
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+}
+complete -F _neutron neutron

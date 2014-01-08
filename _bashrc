@@ -41,6 +41,10 @@ export EDITOR="/usr/bin/vim"
 [[ -s /etc/bash_completion ]] && . /etc/bash_completion
 [[ -s /opt/local/etc/bash_completion ]] && . /opt/local/etc/bash_completion
 
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
+
 # This doesn't work right 
 #if [ -f ~/.bash_knife-completion ]; then
 #  source $(readlink ~/.bash_knife-completion)
