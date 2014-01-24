@@ -1,16 +1,16 @@
 # Setup the virtualenv correctly 
 #
 # Move my private info out of this file
-[[ -s "$HOME/.bash_cloud_secrets" ]] && . "$HOME/.bash_cloud_secrets"
+[[ -s "${HOME}/.bash_cloud_secrets" ]] && source "${HOME}/.bash_cloud_secrets"
 #
 # This has a list of colors
-[[ -s "$HOME/.bash_colors" ]] && . "$HOME/.bash_colors"
+[[ -s "${HOME}/.bash_colors" ]] && source "${HOME}/.bash_colors"
 
 # Add bash completion
-[[ -s "$HOME/.bash_nova_completion" ]] && . "$HOME/.bash_nova_completion"
+[[ -s "${HOME}/.bash_nova_completion" ]] && source "${HOME}/.bash_nova_completion"
 
 # Add some alias for the RND environments
-[[ -s "$HOME/.bash_rnd_zones" ]] && . "$HOME/.bash_rnd_zones"
+[[ -s "${HOME}/.bash_rnd_zones" ]] && source "${HOME}/.bash_rnd_zones"
 
 
 export OS_AUTH_URL="${os_auth_url_0}"
@@ -18,12 +18,12 @@ export NOVA_VERSION="1.1"
 
 export ssh_stuff_0=""
 
-# Set these in your "$HOME/.bash_cloud_secrets"
+# Set these in your "${HOME}/.bash_cloud_secrets"
 export CURRENT_RUBY="${ruby_rvm_0}"
 #rvm ${CURRENT_RUBY}
 
 export CURRENT_PYTHON="${python_virtualenv_0}"
-[[ -s "${CURRENT_PYTHON}" ]] && . "${CURRENT_PYTHON}"
+[[ -s "${CURRENT_PYTHON}" ]] && source "${CURRENT_PYTHON}"
 
 
 #function mine-shared(){
@@ -105,4 +105,4 @@ check-nova(){
 }
 
 # Over ride stuff if needed with this file
-[[ -s "$HOME/.override_bash_stuff" ]] && . "$HOME/.override_bash_stuff"
+[[ -s "${HOME}/.override_bash_stuff" ]] && source "${HOME}/.override_bash_stuff"

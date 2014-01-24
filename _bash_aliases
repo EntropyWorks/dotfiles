@@ -26,3 +26,5 @@ alias mac-info-2="launchctl list | sed 1d | awk ' !/0x|apple|edu\.|org\./ { prin
 alias mac-info-3="ls -1A {,/}Library/{Ad,Compon,Ex,Fram,In,La,Mail/Bu,P*P,Priv,Qu,Scripti,Servi,Sta}* 2> /dev/null"
 alias statedir="cd /srv/salt/state/env/dbaas_state_env"
 alias pillardir="cd /srv/salt/pillar/base"
+
+alias unixpasswd="get_password; python -c \"from passlib.hash import sha512_crypt ; print sha512_crypt.encrypt('\${password}', salt='SALTsalt', rounds=60000)\"; unset password"

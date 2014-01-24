@@ -19,6 +19,22 @@ function tor-yes() {
 	export http_proxy HTTP_PROXY
 }
 
+get_password(){
+    unset password
+    prompt="Enter Password: "
+    while IFS= read -p "$prompt" -r -s -n 1 char
+    do
+        if [[ $char == $'\0' ]]
+        then
+            break
+        fi
+        prompt='*'
+        password+="$char"
+    done
+    echo
+    #echo "Done. Password=$password"
+}
+
 function tor-no() {
 	http_proxy=""
 	HTTP_PROXY=$http_proxy
