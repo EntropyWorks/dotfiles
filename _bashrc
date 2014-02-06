@@ -43,7 +43,7 @@ export EDITOR="/usr/bin/vim"
 [[ -s "/etc/bash_completion" ]] && source "/etc/bash_completion"
 [[ -s "/opt/local/etc/bash_completion" ]] && source "/opt/local/etc/bash_completion"
 
-[[ -f "$(brew --prefix)/etc/bash_completion" ]] && source "$(brew --prefix)/etc/bash_completion"
+[[ -f /usr/local/bin/brew ]] && [[ -f "$(brew --prefix)/etc/bash_completion" ]] && source "$(brew --prefix)/etc/bash_completion"
 
 # Moved my prompt out of this file since its so big
 [[ -s "${HOME}/.bash_prompt" ]] && source "${HOME}/.bash_prompt"
@@ -82,13 +82,15 @@ HISTCONTROL=ignoredups:ignorespace
 HISTSIZE=1000
 HISTFILESIZE=2000
 
+[[ ! -d ${HOME}/.bash_history_dir/ ]] && mkdir ${HOME}/.bash_history_dir && chmod 755 ${HOME}/.bash_history_dir
+
 if [[ "$WINDOW" != "" ]] ; then
-  export HISTFILE="${HOME}/.bash_history.$(hostname).$WINDOW" ;
+  export HISTFILE="${HOME}/.bash_history_dir/$(hostname).${SUDO_USER:-${USER}}.$WINDOW" ;
 else
-  export HISTFILE="${HOME}/.bash_history.$(hostname).${ITERM_SESSION_ID}"
+  export HISTFILE="${HOME}/.bash_history_dir/$(hostname).${SUDO_USER:-${USER}}.$(tty | sed -s 's/\//_/g')"
 fi
 # Not everyone likes seeing this
-echo " HISTFILE=${HISTFILE}"
+#echo " HISTFILE=${HISTFILE}"
 
 
 
