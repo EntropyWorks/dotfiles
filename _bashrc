@@ -87,7 +87,7 @@ HISTFILESIZE=2000
 if [[ "$WINDOW" != "" ]] ; then
   export HISTFILE="${HOME}/.bash_history_dir/$(hostname).${SUDO_USER:-${USER}}.$WINDOW" ;
 else
-  export HISTFILE="${HOME}/.bash_history_dir/$(hostname).${SUDO_USER:-${USER}}.$(tty | sed -s 's/\//_/g')"
+  export HISTFILE="${HOME}/.bash_history_dir/$(hostname).${SUDO_USER:-${USER}}.$(tty | sed 's/\//_/g')"
 fi
 # Not everyone likes seeing this
 #echo " HISTFILE=${HISTFILE}"
