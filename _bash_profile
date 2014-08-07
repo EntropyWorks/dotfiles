@@ -1,12 +1,11 @@
 # Just source the .bashrc so everything get done right
 source ~/.bashrc
 
-
 ##
 # Your previous /Users/yazz/.bash_profile file was backed up as /Users/yazz/.bash_profile.macports-saved_2012-09-29_at_12:51:28
 ##
 
 # MacPorts Installer addition on 2012-09-29_at_12:51:28: adding an appropriate PATH variable for use with MacPorts.
-export PATH=/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$PATH
+#export PATH=/usr/local/bin:/usr/local/sbin:/opt/local/bin:/opt/local/sbin:$PATH
 # Finished adapting your PATH environment variable for use with MacPorts.
 

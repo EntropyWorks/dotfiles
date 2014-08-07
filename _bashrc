@@ -3,11 +3,13 @@
 
 export PATH=/usr/local/bin/usr/local/sbin:${PATH}
 export PATH=/opt/local/bin:/opt/local/sbin:${PATH}
+export PATH=${PATH}:${HOME}/.bin/git-hub/lib
 export PATH=${PATH}:${HOME}/Applications/android-sdk-mac_86/tools
 export PATH=${PATH}:${HOME}/Library/Haskell/bin
 export PATH=${PATH}:${HOME}/Work/diskimage-builder/bin
 export PATH=${PATH}:${HOME}/.bin
 export PATH=${PATH}:.
+
 
 export GIT_SSL_NO_VERIFY=true
 export GIT_SSL_NO_VERIFY=1
@@ -33,8 +35,6 @@ export EDITOR="/usr/bin/vim"
 #  export MANPATH="${MANPATH}:${rvm_man_path}"
 #fi
 
-# Hp Setup One
-[[ -s "${HOME}/.bash_hpcloud" ]] && source "${HOME}/.bash_hpcloud" 
 
 # bash_functions
 [[ -s "${HOME}/.bash_functions" ]] && source "${HOME}/.bash_functions"
@@ -60,6 +60,9 @@ export EDITOR="/usr/bin/vim"
 #if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
 #  . /opt/local/etc/profile.d/bash_completion.sh
 #fi
+
+# Hp Setup One
+[[ -s "${HOME}/.bash_hpcloud" ]] && source "${HOME}/.bash_hpcloud" 
 
 
 [ -z "$PS1" ] && return
@@ -133,3 +136,4 @@ fi
 #  echo $SSH_AUTH_SOCK > ${HOME}/.ssh-auth-sock
 #  echo $SSH_AGENT_PID > ${HOME}/.ssh-agent-pid
 #fi
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib

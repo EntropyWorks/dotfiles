@@ -22,87 +22,9 @@ export ssh_stuff_0=""
 export CURRENT_RUBY="${ruby_rvm_0}"
 #rvm ${CURRENT_RUBY}
 
-export CURRENT_PYTHON="${python_virtualenv_0}"
+#export CURRENT_PYTHON="${python_virtualenv_0}"
+#export CURRENT_PYTHON="$HOME/Work/hpcloud/pip/python-20140609/bin/activate"
 [[ -s "${CURRENT_PYTHON}" ]] && source "${CURRENT_PYTHON}"
-
-
-#function mine-shared(){
-#  export OS_TENANT_NAME="${tenant_1}"
-#  export OS_USERNAME="${username_1}"
-#  export OS_PASSWORD="${password_1}"
-#  export SSH_STUFF="${ssh_stuff_0:-${ssh_stuff_1}}"
-#  #alias ssh='ssh $SSH_STUFF'
-#}
-#
-#function mine1 (){
-#  mine-shared
-#  export OS_AUTH_URL="${os_auth_url_1:-${os_auth_url_0}}"
-#  export OS_REGION_NAME="az-1.region-a.geo-1"
-#  export CLOUD_PROMPT="${Green}mine-1${Color_Off}"
-#  export CURRENT_RUBY="${ruby_rvm_1:-${ruby_rvm_0}}"
-#  rvm ${CURRENT_RUBY}
-#  export CURRENT_PYTHON="${python_virtualenv_1:-${python_virtualenv_0}}"
-#  source ${CURRENT_PYTHON}
-#}
-#
-#mine2(){
-#  mine-shared
-#  export OS_REGION_NAME="az-2.region-a.geo-1"
-#  export OS_AUTH_URL="${os_auth_url_2:-${os_auth_url_0}}"
-#  export CLOUD_PROMPT="${Green}${UBlue}mine-2${Color_Off}"
-#  export CURRENT_RUBY="${ruby_rvm_2:-${ruby_rvm_0}}"
-#  rvm ${CURRENT_RUBY}
-#  export CURRENT_PYTHON="${python_virtualenv_2:-${python_virtualenv_0}}"
-#  source ${CURRENT_PYTHON}
-#}
-#
-#dbas-shared(){
-#  export OS_TENANT_NAME="${tenant_2}"
-#  export OS_USERNAME="${username_2}"
-#  export OS_PASSWORD="${password_2}"
-#  export SSH_STUFF="${ssh_stuff_0:-${ssh_stuff_2}}"
-#  #alias ssh='ssh $SSH_STUFF'
-#}
-#
-#dbaz1(){
-#  dbas-shared
-#  export OS_REGION_NAME="az-1.region-a.geo-1"
-#  export CLOUD_PROMPT="${URed}db-1${Color_Off}"
-#  export OS_AUTH_URL="${os_auth_url_3:-${os_auth_url_0}}"
-#  export CURRENT_RUBY="${ruby_rvm_3:-${ruby_rvm_0}}"
-#  rvm ${CURRENT_RUBY}
-#  export CURRENT_PYTHON="${python_virtualenv_3:-${python_virtualenv_0}}"
-#  source ${CURRENT_PYTHON}
-#}
-#
-#dbaz2(){
-#  dbas-shared
-#  export OS_REGION_NAME="az-2.region-a.geo-1"
-#  export CLOUD_PROMPT="${Cyan}db-2${Color_Off}"
-#  export OS_AUTH_URL="${os_auth_url_4:-${os_auth_url_0}}"
-#  export CURRENT_RUBY="${ruby_rvm_4:-${ruby_rvm_0}}"
-#  rvm ${CURRENT_RUBY}
-#  export CURENT_PYTHON="${python_virtualenv_4:-${python_virtualenv_0}}"
-#  source ${CURRENT_PYTHON}
-#  
-#}
-
-check-nova(){
-  echo "--------------------------------"
-  echo "OS_TENANT_NAME    ${OS_TENANT_NAME}"
-  echo "OS_USERNAME    ${OS_USERNAME}"
-  echo "OS_REGION_NAME    ${OS_REGION_NAME}"
-  echo "OS_AUTH_URL    ${OS_AUTH_URL}"
-  echo "NOVA_VERSION    ${NOVA_VERSION}"
-  echo "--------------------------------"
-  echo "ssh_stuff    ${SSH_STUFF:-none}"
-  echo "rvm ${CURRENT_RUBY}"
-  rvm gemset list
-  echo "--------------------------------"
-  echo "python ${CURRENT_PYTHON}"
-  pip freeze
-  echo "--------------------------------"
-}
 
 # Over ride stuff if needed with this file
 [[ -s "${HOME}/.override_bash_stuff" ]] && source "${HOME}/.override_bash_stuff"
