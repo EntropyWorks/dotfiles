@@ -10,6 +10,8 @@ export PATH=${PATH}:${HOME}/Work/diskimage-builder/bin
 export PATH=${PATH}:${HOME}/.bin
 export PATH=${PATH}:.
 
+export GTK_PATH=/usr/local/lib/gtk-2.0
+
 
 export GIT_SSL_NO_VERIFY=true
 export GIT_SSL_NO_VERIFY=1
