@@ -12,11 +12,6 @@ export PATH=${PATH}:.
 
 export GTK_PATH=/usr/local/lib/gtk-2.0
 
-
-export GIT_SSL_NO_VERIFY=true
-export GIT_SSL_NO_VERIFY=1
-export GIT_GPG_GROUP=true
-
 export EDITOR=/usr/bin/vim
 export TM_SUPPORT_PATH="/Library/Application Support/TextMate/Support"
 export HISTTIMEFORMAT='%F %T '
@@ -97,45 +92,65 @@ fi
 # Not everyone likes seeing this
 #echo " HISTFILE=${HISTFILE}"
 
-
-
-# Imperative that this environment variable always reflects the output
-# of the tty command.
-GPG_TTY=`tty`
-export GPG_TTY
-
 # check current settings
 # stty -a | egrep -o -- '-?\<(ix\w*|start|stop)'
 
-if [ -t 0 ]; then       # check for a terminal
+if [ -z "$PS1" ]; then
+   echo "This shell is not interactive"
+else
+    #echo This shell is interactive
+    if [ -t 0 ]; then       # check for a terminal
+        # Turn off TTY "start" and "stop" commands in all interactive shells.
+        # They default to C-q and C-s, Bash uses C-s to do a forward history search.
+        # I used C-s for tmux window swap
+        stty start ''
+        stty stop  ''
+        stty -ixon ; # disable XON/XOFF flow control
+        stty ixoff ; # enable sending (to app) of start/stop characters
+        stty ixany ; # let any character restart output, not only start character
 
-    # Turn off TTY "start" and "stop" commands in all interactive shells.
-    # They default to C-q and C-s, Bash uses C-s to do a forward history search.
-    # I used C-s for tmux window swap
-    stty start ''
-    stty stop  ''
-    stty -ixon # disable XON/XOFF flow control
-    stty ixoff # enable sending (to app) of start/stop characters
-    stty ixany # let any character restart output, not only start character
-
+    fi
 fi
+
 
 # enable bash completion in interactive shells
 if [ -f "$HOME/.bash_completion_tmux.sh" ]; then
     . "$HOME/.bash_completion_tmux.sh"
 fi
 
-# Script for ensuring only one instance of gpg-agent is running
-# and if there is not one, start an instance of gpg-agent.
-#if test -f ${HOME}/.gpg-agent-info && kill -0 `cut -d: -f 2 ${HOME}/.gpg-agent-info` 2>/dev/null; then
-#  GPG_AGENT_INFO=`cat ${HOME}/.gpg-agent-info`
-#  SSH_AUTH_SOCK=`cat ${HOME}/.ssh-auth-sock`
-#  SSH_AGENT_PID=`cat ${HOME}/.ssh-agent-pid`
-#  export GPG_AGENT_INFO 
-#else
-#  eval $(gpg-agent --daemon --enable-ssh-support)
-#  echo $GPG_AGENT_INFO >${HOME}/.gpg-agent-info
-#  echo $SSH_AUTH_SOCK > ${HOME}/.ssh-auth-sock
-#  echo $SSH_AGENT_PID > ${HOME}/.ssh-agent-pid
-#fi
+#export SSH_AUTH_SOCK=/Users/yazz/.gnupg/S.gpg-agent.ssh
+
+# Imperative that this environment variable always reflects the output
+# of the tty command.
+GPG_TTY=`tty`
+export GPG_TTY
+
+export GIT_SSL_NO_VERIFY=true
+export GIT_SSL_NO_VERIFY=1
+export GIT_GPG_GROUP=true
+
+if test -f $HOME/.gpg-agent-info && \
+  kill -0 `cut -d: -f 2 $HOME/.gpg-agent-info` 2>/dev/null; then
+    . "${HOME}/.gpg-agent-info"
+    export GPG_AGENT_INFO
+    export SSH_AUTH_SOCK
+    export SSH_AGENT_PID
+else
+  eval `gpg-agent --daemon --enable-ssh-support  --write-env-file`
+  . "${HOME}/.gpg-agent-info"
+  export GPG_AGENT_INFO
+  export SSH_AUTH_SOCK
+  export SSH_AGENT_PID
+fi
+
+if [ -f "${HOME}/.gpg-agent-info" ]; then
+  . "${HOME}/.gpg-agent-info"
+  export GPG_AGENT_INFO
+  export SSH_AUTH_SOCK
+  export SSH_AGENT_PID
+fi
+
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib
+
+PERL_MB_OPT="--install_base \"/Users/yazz/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/yazz/perl5"; export PERL_MM_OPT;
