@@ -1,17 +1,27 @@
 # Yazz bash stuff
 #export LC_CTYPE="utf-8"
 
-export PATH=/usr/local/bin:/usr/local/sbin:${PATH}
 export PATH=/opt/local/bin:/opt/local/sbin:${PATH}
+export PATH=${PATH}:/usr/local/packer:/opt/packer
 export PATH=${PATH}:${HOME}/.bin/git-hub/lib
 export PATH=${PATH}:${HOME}/Applications/android-sdk-mac_86/tools
 export PATH=${PATH}:${HOME}/Library/Haskell/bin
+export PATH=${PATH}:${HOME}/Applications/VMware\ Fusion.app/Contents/Library
 export PATH=${PATH}:${HOME}/Work/diskimage-builder/bin
 export PATH=${PATH}:${HOME}/.bin
+export PATH=${PATH}:${HOME}/Library/Android/sdk/platform-tools
+export PATH=${PATH}:/usr/local/opt/go/libexec/bin
+export PATH=${PATH}:${HOME}/Code/go/bin
+export PATH=${PATH}:/usr/local/bin:/usr/local/sbin:${PATH}
 export PATH=${PATH}:.
+
+export GOPATH=${HOME}/Code/go
 
 export GTK_PATH=/usr/local/lib/gtk-2.0
 
+if [ -f ~/.vagrant.d/data/vagrant_login_token ] ; then
+  export ATLAS_TOKEN=`cat ~/.vagrant.d/data/vagrant_login_token`
+fi
 export EDITOR=/usr/bin/vim
 export TM_SUPPORT_PATH="/Library/Application Support/TextMate/Support"
 export HISTTIMEFORMAT='%F %T '
@@ -21,10 +31,18 @@ export EDITOR="/usr/bin/vim"
 
 #export RUBYLIB=${HOME}/knife-plugins/lib
 
+export VAGRANT_DEFAULT_PROVIDER="virtualbox"
+
 # Bash Aliases
 [[ -s "${HOME}/.bash_aliases" ]] && source "${HOME}/.bash_aliases"
 # Ruby Stuff
 [[ -s "${HOME}/.rvm/scripts/rvm" ]] && source "${HOME}/.rvm/scripts/rvm"
+
+# VMware Fusion
+export VAGRANT_VMWARE_FUSION_APP="/Apps/VMware Fusion.app"
+if [ -d "/Applications/VMware Fusion.app/Contents/Library" ]; then
+    export PATH=$PATH:"/Applications/VMware Fusion.app/Contents/Library"
+fi
 
 #if [[ -z "${MANPATH:-}" ]]; then
 #  export MANPATH="${rvm_man_path}"
@@ -44,6 +62,12 @@ export EDITOR="/usr/bin/vim"
 
 # Moved my prompt out of this file since its so big
 [[ -s "${HOME}/.bash_prompt" ]] && source "${HOME}/.bash_prompt"
+
+# You should add the following to your .bashrc (or equivalent):
+#if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
+#    GIT_PROMPT_THEME=Default
+#    source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
+#fi
 
 # This doesn't work right 
 #if [ -f ${HOME}/.bash_knife-completion ]; then
@@ -117,40 +141,58 @@ fi
 if [ -f "$HOME/.bash_completion_tmux.sh" ]; then
     . "$HOME/.bash_completion_tmux.sh"
 fi
-
-#export SSH_AUTH_SOCK=/Users/yazz/.gnupg/S.gpg-agent.ssh
-
-# Imperative that this environment variable always reflects the output
-# of the tty command.
-GPG_TTY=`tty`
-export GPG_TTY
+# enable iterm2 intergration
+if [ -f "$HOME/.bash_iterm2_shell_integration" ]; then
+    . "$HOME/.bash_iterm2_shell_integration"
+fi
 
 export GIT_SSL_NO_VERIFY=true
 export GIT_SSL_NO_VERIFY=1
 export GIT_GPG_GROUP=true
 
+# Imperative that this environment variable always reflects the output
+# of the tty command.
+#export SSH_AUTH_SOCK=/Users/yazz/.gnupg/S.gpg-agent.ssh
+
+GPG_TTY=`tty`
+export GPG_TTY
+
 if test -f $HOME/.gpg-agent-info && \
-  kill -0 `cut -d: -f 2 $HOME/.gpg-agent-info` 2>/dev/null; then
+  kill -0 $(grep GPG_AGENT_INFO $HOME/.gpg-agent-info | cut -d: -f 2) 2>/dev/null; then
     . "${HOME}/.gpg-agent-info"
+    #echo "first . ${HOME}/.gpg-agent-info"
     export GPG_AGENT_INFO
     export SSH_AUTH_SOCK
     export SSH_AGENT_PID
 else
-  eval `gpg-agent --daemon --enable-ssh-support  --write-env-file`
+  eval `gpg-agent --daemon --verbose --enable-ssh-support --log-file "${HOME}/.gpg-agent.log" --write-env-file "${HOME}/.gpg-agent-info"`
   . "${HOME}/.gpg-agent-info"
+  #echo "second . ${HOME}/.gpg-agent-info"
   export GPG_AGENT_INFO
   export SSH_AUTH_SOCK
   export SSH_AGENT_PID
 fi
 
-if [ -f "${HOME}/.gpg-agent-info" ]; then
-  . "${HOME}/.gpg-agent-info"
-  export GPG_AGENT_INFO
-  export SSH_AUTH_SOCK
-  export SSH_AGENT_PID
-fi
+#if [ -f "${HOME}/.gpg-agent-info" ]; then
+#  . "${HOME}/.gpg-agent-info"
+#  echo "third . ${HOME}/.gpg-agent-info"
+#  export GPG_AGENT_INFO
+#  export SSH_AUTH_SOCK
+#  export SSH_AGENT_PID
+#fi
+
+export FLEETCTL_TUNNEL=127.0.0.1:2222
+export FLEETCTL_SSH_USERNAME=core
+export FLEETCTL_KNOWN_HOSTS_FILE=/dev/null
 
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:/usr/local/lib
 
 PERL_MB_OPT="--install_base \"/Users/yazz/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/yazz/perl5"; export PERL_MM_OPT;
+
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+### Added by the Bluemix CLI
+[[ -s "${HOME}/.bash_aliases" ]] && source "${HOME}/.bash_aliases"
+[[ -s "/usr/local/Bluemix/bx/bash_autocomplete" ]] && source /usr/local/Bluemix/bx/bash_autocomplete
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"

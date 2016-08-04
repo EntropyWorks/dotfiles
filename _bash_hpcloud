@@ -12,6 +12,7 @@
 # Add some alias for the RND environments
 [[ -s "${HOME}/.bash_rnd_zones" ]] && source "${HOME}/.bash_rnd_zones"
 
+[[ -s "${HOME}/.bash_completion_openstack" ]] && source "${HOME}/.bash_completion_openstack"
 
 export OS_AUTH_URL="${os_auth_url_0}"
 export NOVA_VERSION="1.1"

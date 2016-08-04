@@ -1,5 +1,11 @@
 # Alias file to be sourced 
+alias ls='ls -FCG'
+
 alias myssh="/usr/bin/ssh"
+alias nssh='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+
+alias fixvpn="sudo route add -host $(host hipchat.hpcloud.net | awk '{print $4}') $(netstat -rn | grep default | head -1 | awk '{print $2}')"
+
 alias git=$(which git)
 alias git-cvsserver=$(which git-cvsserver)
 alias git-flow=$(which git-flow)
@@ -9,24 +15,59 @@ alias git-upload-archive=$(which git-upload-archive)
 alias git-upload-pack=$(which git-upload-pack)
 alias gitk=$(which gitk)
 alias gitx=$(which gitx)
-alias nssh='ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
-alias pass-backup="mkdir -p ~/backup/$(date +%Y/%D) && knife backup export ~/backup/$(date +%Y/%D)"
-alias ls='ls -FCG'
+
+alias brewski='brew update && brew upgrade --all ;  brew cleanup; brew cask cleanup; brew doctor'
+
 alias webserver="python -m SimpleHTTPServer"
+
 alias tftp_on='sudo launchctl load -w /System/Library/LaunchDaemons/tftp.plist'
 alias tftp_off='sudo launchctl unload -w /System/Library/LaunchDaemons/tftp.plist'
+
 # Start privoxy that i installed via macports
 alias privoxy="sudo launchctl unload /Library/LaunchDaemons/org.macports.Privoxy.plist; \
            sleep 2; sudo launchctl load /Library/LaunchDaemons/org.macports.Privoxy.plist"
-if [ -f ~/.bash_private_aliases ] ; then 
-  source ~/.bash_private_aliases
-fi
+
+alias pass-backup="mkdir -p ~/backup/$(date +%Y/%D) && knife backup export ~/backup/$(date +%Y/%D)"
 
 alias mac-info-0="kextstat -kl | awk ' !/apple/ { print $6 $7 } '"
 alias mac-info-1="sudo launchctl list | sed 1d | awk ' !/0x|apple|com\.vix|edu\.|org\./ { print $3 } '"
 alias mac-info-2="launchctl list | sed 1d | awk ' !/0x|apple|edu\.|org\./ { print $3 } '"
 alias mac-info-3="ls -1A {,/}Library/{Ad,Compon,Ex,Fram,In,La,Mail/Bu,P*P,Priv,Qu,Scripti,Servi,Sta}* 2> /dev/null"
+
 alias statedir="cd /srv/salt/state/env/dbaas_state_env"
 alias pillardir="cd /srv/salt/pillar/base"
 
+#alias rmdocker-all="docker ps -a | grep '${1:-DONOTRUN}' | awk '{print $1}' | xargs --no-run-if-empty docker rm"
 alias unixpasswd="get_password; python -c \"from passlib.hash import sha512_crypt ; print sha512_crypt.encrypt('\${password}', salt='SALTsalt', rounds=60000)\"; unset password"
+
+if [ -f ~/.bash_private_aliases ] ; then 
+  source ~/.bash_private_aliases
+fi
+
+
+
+serial () {
+        SPEED=${1}
+        SERIAL_DEVICE=${2:-GUESS}
+        if [ -z "${SPEED}" ]; then
+                echo "You must specify a speed as the first option."
+                echo "Common speeds are:"
+                echo "    300 9600 19200 38400 57600 115200"
+                return 1
+        fi
+        if [ "${SERIAL_DEVICE}" = "GUESS" ]; then
+                if [ -c /dev/ttyUSB0 ]; then
+                        SERIAL_DEVICE=/dev/ttyUSB0
+                elif [ -c /dev/ttyS0 ]; then
+                        SERIAL_DEVICE=/dev/ttyS0
+                elif [ -c /dev/tty.usbserial-A102L2E2 ]; then
+                        SERIAL_DEVICE=/dev/tty.usbserial-A102L2E2
+                else
+                        echo "Could not find a serial device."
+                        echo "Specify the serial device as the second option."
+                        return 1
+                fi
+        fi
+        SCREEN_OPTS="${SERIAL_DEVICE} ${SPEED},cs8,parenb,-cstopb,-hupcl"
+        screen -t "${SCREEN_OPTS}" ${SCREEN_OPTS}
+}
